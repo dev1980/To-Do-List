@@ -3,3 +3,10 @@
 h1 {
   color: gray;
 }
+#projectForm {
+  display: none;
+}
+.left-block {
+  border: 1px solid orange;
+  
+}
