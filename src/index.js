@@ -11,10 +11,13 @@ function updateLocalStorage(array) {
   window.localStorage.setItem('projects', JSON.stringify(array));
 }
 
+let currentProject = todoProject[todoProject.length - 1];
+
 const addProject = document.getElementById('add-project');
 const projectName = document.getElementById('projectName');
 const projectList = document.getElementById('projectList');
 const submitProject = document.getElementById('submit');
+const createTodo = document.getElementById('create-todo');
 
 function addProjectForm() {
   console.log('add project clicked');
@@ -36,25 +39,33 @@ function getProjectName() {
     todoProject.push(projectObj);
     updateLocalStorage(todoProject);
     projectList.appendChild(project);
+    todoProject[parseInt(project.getAttribute('data-index'))];
+    currentProject = getProject(parseInt(project.getAttribute('data-index')));
   }
   console.log(todoProject.length);
 }
 
-function getProject(project = NULL) {
-  if(project === NULL){
-    return todoProject[todoProject.length - 1] 
-  }else {
-    return todoProject[project]
+function getProject(project = null) {
+  if (project === null) {
+    return currentProject;
   }
+  return todoProject[project];
 }
 
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
+createTodo.addEventListener('click', () => {
+  const todo = new Todo('Shopping', 'Buying grocries', '10-02-2020', 'medium');
+  if (getProject() != undefined) {
+    console.log(getProject().todoList);
+    getProject().todoList.push(todo);
+  }
+});
 
 projectList.addEventListener('click', (e) => {
-  const currentProject = e.target;
-  console.log(todoProject[parseInt(currentProject.getAttribute('data-index'))].name);
-  todoProject[parseInt(currentProject.getAttribute('data-index'))];
+  const currentProj = e.target;
+  todoProject[parseInt(currentProj.getAttribute('data-index'))];
+  currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
 });
 
 console.log('Message for webpack');
