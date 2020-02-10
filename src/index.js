@@ -1,6 +1,15 @@
 import './style/style.css';
-import './script/todo';
-import './script/project';
+import { Todo } from './script/todo';
+import { Project } from './script/project';
+
+let todoProject = JSON.parse(window.localStorage.getItem('projects'));
+if (todoProject == null) {
+  todoProject = [];
+}
+
+function updateLocalStorage(array) {
+  window.localStorage.setItem('projects', JSON.stringify(array));
+}
 
 const addProject = document.getElementById('add-project');
 const projectName = document.getElementById('projectName');
@@ -21,12 +30,23 @@ function addProjectForm() {
 function getProjectName() {
   if (projectName.value != '') {
     const project = document.createElement('div');
+    project.setAttribute('data-index', (todoProject.length - 1) + 1);
     project.textContent = projectName.value;
+    const projectObj = new Project(projectName.value);
+    todoProject.push(projectObj);
+    updateLocalStorage(todoProject);
     projectList.appendChild(project);
   }
+  console.log(todoProject.length);
 }
 
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
+
+projectList.addEventListener('click', (e) => {
+  const currentProject = e.target;
+  console.log(todoProject[parseInt(currentProject.getAttribute('data-index'))].name);
+  todoProject[parseInt(currentProject.getAttribute('data-index'))];
+});
 
 console.log('Message for webpack');
