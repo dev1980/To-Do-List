@@ -141,7 +141,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Project\", function() { return Project; });\nclass Project {\r\n  constructor(name) {\r\n    this._name = name;\r\n  }\r\n\r\n  get name() {\r\n    return this._name;\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/script/project.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Project\", function() { return Project; });\nclass Project {\r\n  constructor(name) {\r\n    this._name = name;\r\n    this.todoList = [];\r\n  }\r\n\r\n  get name() {\r\n    return this._name;\r\n  }\r\n  \r\n  addToDo(item){\r\n    this.todoList.push(item);\r\n  }\r\nshowList(){\r\n    return this.todoList;\r\n}\r\n\r\n}\r\n\n\n//# sourceURL=webpack:///./src/script/project.js?");
 
 /***/ }),
 
