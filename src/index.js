@@ -40,6 +40,14 @@ function getProjectName() {
   console.log(todoProject.length);
 }
 
+function getProject(project = NULL) {
+  if(project === NULL){
+    return todoProject[todoProject.length - 1] 
+  }else {
+    return todoProject[project]
+  }
+}
+
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
 
