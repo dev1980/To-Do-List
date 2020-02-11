@@ -1,6 +1,6 @@
-import './style/style.css';
 import { Todo } from './script/todo';
 import { Project } from './script/project';
+import './style/app.scss';
 
 let todoProject = JSON.parse(window.localStorage.getItem('projects'));
 if (todoProject == null) {
@@ -20,11 +20,11 @@ const submitProject = document.getElementById('submit');
 const createTodo = document.getElementById('create-todo');
 const projectTitle = document.getElementById('project-title');
 const tbody = document.getElementById('tbody');
+const projectForm = document.getElementById('projectForm');
+projectForm.style.display = 'none';
 
 function addProjectForm() {
-  const projectForm = document.getElementById('projectForm');
-  const projectBtn = projectForm.style.display;
-  if (projectBtn === 'none') {
+  if (projectForm.style.display === 'none') {
     projectForm.style.display = 'block';
   } else {
     projectForm.style.display = 'none';
