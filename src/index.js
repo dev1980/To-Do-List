@@ -22,7 +22,6 @@ const projectTitle = document.getElementById('project-title');
 const tbody = document.getElementById('tbody');
 
 function addProjectForm() {
-  console.log('add project clicked');
   const projectForm = document.getElementById('projectForm');
   const projectBtn = projectForm.style.display;
   if (projectBtn === 'none') {
@@ -45,7 +44,6 @@ function getProjectName() {
     currentProject = getProject(parseInt(project.getAttribute('data-index')));
     projectName.value = '';
   }
-  console.log(todoProject.length);
 }
 
 function getProject(project = null) {
@@ -56,7 +54,6 @@ function getProject(project = null) {
 }
 
 function displayProjectList() {
-  console.log(todoProject.length);
   projectList.innerHTML = '';
   todoProject.forEach((element, index) => {
     const div = document.createElement('div');
@@ -115,16 +112,12 @@ projectList.addEventListener('click', (e) => {
   const currentProj = e.target;
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
-  console.log(`${currentProject} ${parseInt(currentProj.getAttribute('data-index'))}`);
   projectTitle.textContent = currentProject.name;
   renderTodo(currentProject);
 });
 
 document.addEventListener('DOMContentLoaded', displayProjectList);
-// document.onload = displayProjectList();
 
 document.querySelector('.table').addEventListener('click', (e) => {
   deleteProject(e.target);
 });
-
-console.log('Message for webpack');
