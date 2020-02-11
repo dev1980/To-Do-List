@@ -74,8 +74,8 @@ function renderTodo(currProject) {
     <td>${todo.description}</td>
     <td>${todo.priority}</td>
     <td>${todo.dueDate}</td>
-    <td>${'status'}</td>
-    <td>X</td>
+    <td><input type="checkbox" name="${todo.title}" unchecked></td>
+    <td><a href="#" class="btn btn-small delete" >X</a></td>
   </tr>`;
     tbody.innerHTML += uiString;
   });
@@ -97,6 +97,15 @@ const todoItem = () => {
   renderTodo(currentProject);
 };
 
+function deleteProject(el) {
+  if (el.classList.contains('delete')) {
+    el.parentElement.parentElement.remove();
+    const project = el.getAttribute('data-index');
+    todoProject.splice(project, 1);
+    updateLocalStorage(todoProject);
+  }
+}
+
 
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
@@ -113,5 +122,9 @@ projectList.addEventListener('click', (e) => {
 
 document.addEventListener('DOMContentLoaded', displayProjectList);
 // document.onload = displayProjectList();
+
+document.querySelector('.table').addEventListener('click', (e) => {
+  deleteProject(e.target);
+});
 
 console.log('Message for webpack');
