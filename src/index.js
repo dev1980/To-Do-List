@@ -19,11 +19,12 @@ const projectList = document.getElementById('projectList');
 const submitProject = document.getElementById('submit');
 const createTodo = document.getElementById('create-todo');
 const tbody = document.getElementById('tbody');
+
 function addProjectForm() {
   console.log('add project clicked');
   const projectForm = document.getElementById('projectForm');
   const projectBtn = projectForm.style.display;
-  if (projectBtn == 'none') {
+  if (projectBtn === 'none') {
     projectForm.style.display = 'block';
   } else {
     projectForm.style.display = 'none';
@@ -31,7 +32,7 @@ function addProjectForm() {
 }
 
 function getProjectName() {
-  if (projectName.value != '') {
+  if (projectName.value !== '') {
     const project = document.createElement('div');
     project.setAttribute('data-index', (todoProject.length - 1) + 1);
     project.textContent = projectName.value;
@@ -62,38 +63,45 @@ function displayProjectList() {
     projectList.appendChild(div);
   });
 }
+
+function renderTodo(currProject) {
+  tbody.innerHTML = '';
+  currProject.todoList.forEach((todo) => {
+    const uiString = `<tr>
+    <td>${todo.title}</td>
+    <td>${todo.description}</td>
+    <td>${todo.priority}</td>
+    <td>${todo.duedate}</td>
+    <td>X</td>
+  </tr>`;
+    tbody.innerHTML += uiString;
+  });
+}
+
 const todoItem = () => {
   const title = document.getElementById('title');
   const description = document.getElementById('description');
   const priority = document.getElementById('priority');
   const duedate = document.getElementById('duedate');
   const todo = new Todo(title.value, description.value, priority.value, duedate.value);
-  if (getProject() != undefined) {
-    console.log(getProject().todoList);
+  if (getProject() !== undefined) {
     getProject().todoList.push(todo);
     updateLocalStorage(todoProject);
   }
-}
+  renderTodo(currentProject);
+};
+
+
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
-createTodo.addEventListener('click', todoItem );
+createTodo.addEventListener('click', todoItem);
 
 projectList.addEventListener('click', (e) => {
-  tbody.innerHTML = '';
   const currentProj = e.target;
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
   console.log(`${currentProject} ${parseInt(currentProj.getAttribute('data-index'))}`);
-  currentProject.todoList.forEach(todo => {
-    let uiString = `<tr>
-    <td>${todo.title}</td>
-    <td>${todo.description}</td>
-    <td>${todo.priority}</td>
-    <td>${todo.duedate}</td>
-    <td>X</td>
-  </tr>`
-  tbody.innerHTML += uiString;
-  })
+  renderTodo(currentProject);
 });
 
 document.addEventListener('DOMContentLoaded', displayProjectList);
