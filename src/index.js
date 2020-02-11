@@ -1,5 +1,5 @@
-import { Todo } from './script/todo';
-import { Project } from './script/project';
+import Todo from './script/todo';
+import Project from './script/project';
 import './style/app.scss';
 
 let todoProject = JSON.parse(window.localStorage.getItem('projects'));
@@ -31,6 +31,13 @@ function addProjectForm() {
   }
 }
 
+function getProject(project = null) {
+  if (project === null) {
+    return currentProject;
+  }
+  return todoProject[project];
+}
+
 function getProjectName() {
   if (projectName.value !== '') {
     const project = document.createElement('div');
@@ -40,17 +47,9 @@ function getProjectName() {
     todoProject.push(projectObj);
     updateLocalStorage(todoProject);
     projectList.appendChild(project);
-    todoProject[parseInt(project.getAttribute('data-index'))];
-    currentProject = getProject(parseInt(project.getAttribute('data-index')));
+    currentProject = getProject(parseInt(project.getAttribute('data-index'), 10));
     projectName.value = '';
   }
-}
-
-function getProject(project = null) {
-  if (project === null) {
-    return currentProject;
-  }
-  return todoProject[project];
 }
 
 function renderTodo(currProject) {
@@ -117,8 +116,7 @@ createTodo.addEventListener('click', todoItem);
 
 projectList.addEventListener('click', (e) => {
   const currentProj = e.target;
-  todoProject[parseInt(currentProj.getAttribute('data-index'))];
-  currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
+  currentProject = getProject(parseInt(currentProj.getAttribute('data-index'), 10));
   projectTitle.textContent = currentProject.name;
   renderTodo(currentProject);
 });
