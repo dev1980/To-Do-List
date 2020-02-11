@@ -23,7 +23,7 @@
           <div class="col-md-8">
             <div class="w-50 m-auto">
             <h1>Create To Do List</h1>
-            <div>
+            <div class="mb-4">
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" placeholder="title">
@@ -48,13 +48,17 @@
             </div>
           </div>
           <!-- Add table table to display the to do list-->
-          <table class="table">
+          <div class="text-center">
+            <h4 id="project-title"></h4>
+          </div>
+          <table class="table mb-4">
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Priority</th>
-                <th>Type</th>
+                <th>Due Date</th>
+                <th>Status</th>
                 <th>Delete</th>
               </tr>
             </thead>

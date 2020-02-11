@@ -18,6 +18,7 @@ const projectName = document.getElementById('projectName');
 const projectList = document.getElementById('projectList');
 const submitProject = document.getElementById('submit');
 const createTodo = document.getElementById('create-todo');
+const projectTitle = document.getElementById('project-title');
 const tbody = document.getElementById('tbody');
 
 function addProjectForm() {
@@ -72,7 +73,8 @@ function renderTodo(currProject) {
     <td>${todo.title}</td>
     <td>${todo.description}</td>
     <td>${todo.priority}</td>
-    <td>${todo.duedate}</td>
+    <td>${todo.dueDate}</td>
+    <td>${'status'}</td>
     <td>X</td>
   </tr>`;
     tbody.innerHTML += uiString;
@@ -91,6 +93,7 @@ const todoItem = () => {
     title.value = '';
     description.value = '';
   }
+  projectTitle.textContent = currentProject.name;
   renderTodo(currentProject);
 };
 
@@ -104,6 +107,7 @@ projectList.addEventListener('click', (e) => {
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
   console.log(`${currentProject} ${parseInt(currentProj.getAttribute('data-index'))}`);
+  projectTitle.textContent = currentProject.name;
   renderTodo(currentProject);
 });
 
