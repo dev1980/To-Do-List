@@ -18,7 +18,7 @@ const projectName = document.getElementById('projectName');
 const projectList = document.getElementById('projectList');
 const submitProject = document.getElementById('submit');
 const createTodo = document.getElementById('create-todo');
-
+const tbody = document.getElementById('tbody');
 function addProjectForm() {
   console.log('add project clicked');
   const projectForm = document.getElementById('projectForm');
@@ -70,6 +70,7 @@ createTodo.addEventListener('click', () => {
   if (getProject() != undefined) {
     console.log(getProject().todoList);
     getProject().todoList.push(todo);
+    updateLocalStorage(todoProject);
   }
 });
 
@@ -78,6 +79,16 @@ projectList.addEventListener('click', (e) => {
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
   console.log(`${currentProject} ${parseInt(currentProj.getAttribute('data-index'))}`);
+  currentProject.todoList.forEach(todo => {
+    let uiString = `<tr>
+    <td>${todo.title}</td>
+    <td>${todo.description}</td>
+    <td>${todo.title}/td>
+    <td>${todo.title}</td>
+    <td>X</td>
+  </tr>`
+  tbody.innerHTML += uiString;
+  })
 });
 
 document.addEventListener('DOMContentLoaded', displayProjectList);
