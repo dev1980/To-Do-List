@@ -62,17 +62,21 @@ function displayProjectList() {
     projectList.appendChild(div);
   });
 }
-
-addProject.addEventListener('click', addProjectForm);
-submitProject.addEventListener('click', getProjectName);
-createTodo.addEventListener('click', () => {
-  const todo = new Todo('Shopping', 'Buying grocries', '10-02-2020', 'medium');
+const todoItem = () => {
+  const title = document.getElementById('title');
+  const description = document.getElementById('description');
+  const priority = document.getElementById('priority');
+  const duedate = document.getElementById('duedate');
+  const todo = new Todo(title.value, description.value, priority.value, duedate.value);
   if (getProject() != undefined) {
     console.log(getProject().todoList);
     getProject().todoList.push(todo);
     updateLocalStorage(todoProject);
   }
-});
+}
+addProject.addEventListener('click', addProjectForm);
+submitProject.addEventListener('click', getProjectName);
+createTodo.addEventListener('click', todoItem );
 
 projectList.addEventListener('click', (e) => {
   const currentProj = e.target;
