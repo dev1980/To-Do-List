@@ -53,20 +53,10 @@ function getProject(project = null) {
   return todoProject[project];
 }
 
-function displayProjectList() {
-  projectList.innerHTML = '';
-  todoProject.forEach((element, index) => {
-    const div = document.createElement('div');
-    div.setAttribute('data-index', index);
-    div.textContent = element.name;
-    projectList.appendChild(div);
-  });
-}
-
 function renderTodo(currProject) {
   tbody.innerHTML = '';
-  currProject.todoList.forEach((todo) => {
-    const uiString = `<tr>
+  currProject.todoList.forEach((todo, index) => {
+    const uiString = `<tr data-todo="${index}">
     <td>${todo.title}</td>
     <td>${todo.description}</td>
     <td>${todo.priority}</td>
@@ -74,7 +64,9 @@ function renderTodo(currProject) {
     <td><input type="checkbox" name="${todo.title}" unchecked></td>
     <td><a href="#" class="btn btn-small delete" >X</a></td>
   </tr>`;
-    tbody.innerHTML += uiString;
+    if (todo.title !== '' && todo.description !== '') {
+      tbody.innerHTML += uiString;
+    }
   });
 }
 
@@ -90,16 +82,31 @@ const todoItem = () => {
     title.value = '';
     description.value = '';
   }
-  projectTitle.textContent = currentProject.name;
-  renderTodo(currentProject);
+  if (currentProject !== undefined) {
+    projectTitle.textContent = currentProject.name;
+    renderTodo(currentProject);
+  }
 };
+
+function displayProjectList() {
+  projectList.innerHTML = '';
+  todoProject.forEach((element, index) => {
+    const div = document.createElement('div');
+    div.setAttribute('data-index', index);
+    div.textContent = element.name;
+    projectList.appendChild(div);
+  });
+  todoItem();
+}
 
 function deleteProject(el) {
   if (el.classList.contains('delete')) {
     el.parentElement.parentElement.remove();
-    const project = el.getAttribute('data-index');
-    todoProject.splice(project, 1);
+    const project = currentProject;
+    const todoData = el.getAttribute('data-todo');
+    project.todoList.splice(todoData, 1);
     updateLocalStorage(todoProject);
+    displayProjectList();
   }
 }
 
