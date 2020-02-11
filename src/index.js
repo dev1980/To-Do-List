@@ -42,6 +42,7 @@ function getProjectName() {
     projectList.appendChild(project);
     todoProject[parseInt(project.getAttribute('data-index'))];
     currentProject = getProject(parseInt(project.getAttribute('data-index')));
+    projectName.value = '';
   }
   console.log(todoProject.length);
 }
@@ -87,6 +88,8 @@ const todoItem = () => {
   if (getProject() !== undefined) {
     getProject().todoList.push(todo);
     updateLocalStorage(todoProject);
+    title.value = '';
+    description.value = '';
   }
   renderTodo(currentProject);
 };
