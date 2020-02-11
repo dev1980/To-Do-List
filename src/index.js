@@ -52,6 +52,17 @@ function getProject(project = null) {
   return todoProject[project];
 }
 
+function displayProjectList() {
+  console.log(todoProject.length);
+  projectList.innerHTML = '';
+  todoProject.forEach((element, index) => {
+    const div = document.createElement('div');
+    div.setAttribute('data-index', index);
+    div.textContent = element.name;
+    projectList.appendChild(div);
+  });
+}
+
 addProject.addEventListener('click', addProjectForm);
 submitProject.addEventListener('click', getProjectName);
 createTodo.addEventListener('click', () => {
@@ -66,6 +77,10 @@ projectList.addEventListener('click', (e) => {
   const currentProj = e.target;
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
+  console.log(`${currentProject} ${parseInt(currentProj.getAttribute('data-index'))}`);
 });
+
+document.addEventListener('DOMContentLoaded', displayProjectList);
+// document.onload = displayProjectList();
 
 console.log('Message for webpack');
