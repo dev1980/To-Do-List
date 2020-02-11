@@ -79,6 +79,7 @@ submitProject.addEventListener('click', getProjectName);
 createTodo.addEventListener('click', todoItem );
 
 projectList.addEventListener('click', (e) => {
+  tbody.innerHTML = '';
   const currentProj = e.target;
   todoProject[parseInt(currentProj.getAttribute('data-index'))];
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index')));
@@ -87,8 +88,8 @@ projectList.addEventListener('click', (e) => {
     let uiString = `<tr>
     <td>${todo.title}</td>
     <td>${todo.description}</td>
-    <td>${todo.title}/td>
-    <td>${todo.title}</td>
+    <td>${todo.priority}</td>
+    <td>${todo.duedate}</td>
     <td>X</td>
   </tr>`
   tbody.innerHTML += uiString;
