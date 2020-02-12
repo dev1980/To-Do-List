@@ -1,5 +1,6 @@
 import Todo from './script/todo';
 import Project from './script/project';
+import TodoDom from './script/todo-dom';
 import './style/app.scss';
 
 let todoProject = JSON.parse(window.localStorage.getItem('projects'));
@@ -14,6 +15,8 @@ if (todoProject == null) {
 function updateLocalStorage(array) {
   window.localStorage.setItem('projects', JSON.stringify(array));
 }
+
+const todoDom = new TodoDom();
 
 let currentProject = todoProject[todoProject.length - 1];
 
@@ -56,23 +59,6 @@ function getProjectName() {
   }
 }
 
-function renderTodo(currProject) {
-  tbody.innerHTML = '';
-  currProject.todoList.forEach((todo, index) => {
-    const uiString = `<tr data-todo="${index}">
-    <td>${todo.title}</td>
-    <td>${todo.description}</td>
-    <td>${todo.priority}</td>
-    <td>${todo.dueDate}</td>
-    <td><input type="checkbox" name="${todo.title}" unchecked></td>
-    <td><a href="#" class="btn btn-small delete" >X</a></td>
-  </tr>`;
-    if (todo.title !== '' && todo.description !== '') {
-      tbody.innerHTML += uiString;
-    }
-  });
-}
-
 const todoItem = () => {
   const title = document.getElementById('title');
   const description = document.getElementById('description');
@@ -87,7 +73,7 @@ const todoItem = () => {
   }
   if (currentProject !== undefined) {
     projectTitle.textContent = currentProject.name;
-    renderTodo(currentProject);
+    todoDom.renderTodo(currentProject, tbody);
   }
 };
 
@@ -99,7 +85,6 @@ function displayProjectList() {
     div.textContent = element.name;
     projectList.appendChild(div);
   });
-  console.log(todoProject.length);
   todoItem();
 }
 
@@ -123,7 +108,7 @@ projectList.addEventListener('click', (e) => {
   const currentProj = e.target;
   currentProject = getProject(parseInt(currentProj.getAttribute('data-index'), 10));
   projectTitle.textContent = currentProject.name;
-  renderTodo(currentProject);
+  todoDom.renderTodo(currentProject, tbody);
 });
 
 document.addEventListener('DOMContentLoaded', displayProjectList);
