@@ -5,6 +5,10 @@ import './style/app.scss';
 let todoProject = JSON.parse(window.localStorage.getItem('projects'));
 if (todoProject == null) {
   todoProject = [];
+  const todo1 = new Todo('Shopping', 'Buying groceries', 'medium', '02-12-2020');
+  const project1 = new Project('Default Project');
+  project1.setTodoList(todo1);
+  todoProject.push(project1);
 }
 
 function updateLocalStorage(array) {
@@ -95,6 +99,7 @@ function displayProjectList() {
     div.textContent = element.name;
     projectList.appendChild(div);
   });
+  console.log(todoProject.length);
   todoItem();
 }
 
