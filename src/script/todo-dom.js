@@ -1,8 +1,6 @@
 export default class TodoDom {
-  constructor() {
-  }
 
-  renderTodo(currProject, element) {
+  function renderTodo(currProject, element) {
     element.innerHTML = '';
     currProject.todoList.forEach((todo, index) => {
       const uiString = `<tr data-todo="${index}">
