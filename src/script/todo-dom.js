@@ -1,5 +1,5 @@
-export default class TodoDom {
-
+/* eslint-disable no-param-reassign */
+const TodoDom = (() => {
   function renderTodo(currProject, element) {
     element.innerHTML = '';
     currProject.todoList.forEach((todo, index) => {
@@ -16,4 +16,7 @@ export default class TodoDom {
       }
     });
   }
-}
+  return { renderTodo };
+});
+
+export default TodoDom;
