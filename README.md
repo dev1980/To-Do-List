@@ -3,7 +3,7 @@ JavaScript Project
 
 This project built using JS modules.
 
-> This project is a Todo List built with JavaScript. We can add projects and several tasks to each project with a priority, dueDate, title and description. Also we can mark checked once the task is completed.
+> This project is a Todo List built with JavaScript. We can add projects and several tasks to each project with a priority, due date, title and description. Also we can mark checked once the task is completed.
 
 ## Link to Project
 
@@ -53,7 +53,7 @@ npx webpack
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](https://github.com/dev1980/To-Do-List/issues).
 
@@ -64,4 +64,6 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MiT](https://opensource.org/licenses/MIT) licensed.
+
+
 
